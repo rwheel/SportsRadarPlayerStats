@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-
 public class PlayerController implements Initializable {
     private String sportsRadarApiKey = System.getenv("Sports_API_Key");
     private String baseUrl = "http://api.sportradar.us/mlb/trial/v6.6/en";
@@ -85,11 +84,12 @@ public class PlayerController implements Initializable {
     void displayTeamData(HierarchyResponse response) throws IOException {
         String strA = String.valueOf(response.getLeagues());
         var reformat = strA.replace("[", "")
-                      .replace("]", "")
-                      .replace("{", "")
-                      .replace("}", "");
+                           .replace("]", "")
+                           .replace("{", "")
+                           .replace("}", "");
 
-        teamInfo = Arrays.stream(reformat.split("[,\\/]")).collect(Collectors.toList());
+        teamInfo = Arrays.stream(reformat.split("[,\\/]"))
+                         .collect(Collectors.toList());
      
         String strB = String.valueOf(teamInfo);
         var name = strB.replace("[", " ")
@@ -103,12 +103,13 @@ public class PlayerController implements Initializable {
     void displayPlayerData(Team response) throws IOException {
         String strA = String.valueOf(response.getPlayers());
         var reformat = strA.replace("[", "")
-                      .replace("]", "")
-                      .replace("{", "")
-                      .replace("}", "")
-                      .replace("null", "No College on Record");
+                           .replace("]", "")
+                           .replace("{", "")
+                           .replace("}", "")
+                           .replace("null", "No College on Record");
 
-        playerInfo = Arrays.stream(reformat.split("[,\\/]")).collect(Collectors.toList());
+        playerInfo = Arrays.stream(reformat.split("[,\\/]"))
+                           .collect(Collectors.toList());
 
         String strB = String.valueOf(playerInfo);
         var name = strB.replace("[", " ")
