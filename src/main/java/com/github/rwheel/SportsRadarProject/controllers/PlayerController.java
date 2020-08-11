@@ -34,36 +34,47 @@ public class PlayerController implements Initializable {
     private TextArea outPutArea;
 
     @FXML
-    void handleTeams(ActionEvent event) {
+    void handleTeams(ActionEvent event) throws Exception {
         var uri = baseUrl + "/league/hierarchy.json";
         HashMap<String, String> params = new HashMap<>() {{
             put("api_key", sportsRadarApiKey);
         }};
-        try {
-            var response = doGet(uri, params);
+
+        HttpResponse<String> response = doGet(uri, params);
+        int statusCode = response.statusCode();
+        if (statusCode == 200) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             var hierarchyResponse = gson.fromJson(response.body(), HierarchyResponse.class);
-
             displayTeamData(hierarchyResponse);
-        } catch (Exception e) {
-            System.out.println(e.toString());
+        }else if (statusCode == 404) {
+            outPutArea.setText("");
+            outPutArea.setText("Team not found");
+        } else if (statusCode == 401) {
+            outPutArea.setText("");
+            outPutArea.setText("Bad Token");
         }
     }
 
     @FXML
-    void handleTeamPlayers(ActionEvent event) {
+    void handleTeamPlayers(ActionEvent event) throws Exception {
         var teamID = teamNumberField.getText();
         var uri = baseUrl + "/teams/" + teamID + "/profile.json";
         HashMap<String, String> params = new HashMap<>() {{
             put("api_key", sportsRadarApiKey);
         }};
-        try {
-            var response = doGet(uri, params);
+
+        HttpResponse<String> response = doGet(uri, params);
+        int statusCode = response.statusCode();
+        if (statusCode == 200) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             var team = gson.fromJson(response.body(), Team.class);
             displayPlayerData(team);
-        } catch (Exception e) {
-            System.out.println(e.toString());
+        }else if (statusCode == 404) {
+            outPutArea.setText("");
+            outPutArea.setText("User not found");
+        } else if (statusCode == 401) {
+            outPutArea.setText("");
+            outPutArea.setText("Bad Token");
         }
     }
 
@@ -72,6 +83,7 @@ public class PlayerController implements Initializable {
         var paramsString = params.keySet().stream()
                                  .map((key) -> key + "=" + params.get(key))
                                  .collect(Collectors.joining("&"));
+
         var requestURI = URI.create(uri + "?" + paramsString);
 
         var request = HttpRequest.newBuilder(requestURI).GET().build();
