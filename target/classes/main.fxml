@@ -3,26 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.cell.*?>
-<?import javafx.collections.*?>
-<?import fxmltableview.*?>
-
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.github.rwheel.SportsRadarProject.controllers.PlayerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.rwheel.SportsRadarProject.controllers.PlayerController">
         <VBox>
                 <children>
-                        <Button onAction="#handleTeams" text="Display teams"/>
+                        <Button onAction="#handleTeams" text="Display teams" />
                 </children>
                 <children>
-                        <TextField fx:id="teamNumberField" maxWidth="200"/>
+                        <TextField fx:id="teamNumberField" prefWidth="250" promptText="Enter Team ID to get Teams Players" />
                 </children>
                 <children>
-                        <Button onAction="#handleTeamPlayers" text="Display Players"/>
+                        <Button onAction="#handleTeamPlayers" text="Display Players" />
                 </children>
         </VBox>
-                <TextArea fx:id="outPutArea" editable="false" layoutX="268.0" layoutY="14.0" prefHeight="283.0" prefWidth="358.0" />
-
-
+        <TextArea fx:id="outPutArea" editable="false" layoutX="260.0" layoutY="14.0" prefHeight="283.0" prefWidth="402.0" />
 </AnchorPane>

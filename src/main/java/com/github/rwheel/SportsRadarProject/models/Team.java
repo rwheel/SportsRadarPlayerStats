@@ -10,15 +10,9 @@ public class Team {
     private String id;
     private ArrayList<Player> players;
 
-
-
     public String getName() {
         return name;
     }
-
-
-
-
 
     public String getMarket() {
         return market;
@@ -34,6 +28,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return name+" "+market+" "+id+ "" +players+"\n";
+
+        return "Team Name: "+name+", Market: "+market+", TeamID: "+id+"\n";
     }
 }

@@ -50,6 +50,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "\n"+full_name+" "+jersey_number + " " +college + " " + position;
+        return "Player Name: "+full_name+", Number: "+jersey_number + ", College: " +college + ", Position: " + position+"\n";
     }
 }
