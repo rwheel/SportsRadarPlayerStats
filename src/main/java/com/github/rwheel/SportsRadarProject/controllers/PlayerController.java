@@ -78,7 +78,6 @@ public class PlayerController implements Initializable {
         }
     }
 
-
     private HttpResponse<String> doGet(String uri, HashMap<String, String> params) throws Exception {
         var paramsString = params.keySet().stream()
                                  .map((key) -> key + "=" + params.get(key))
@@ -110,7 +109,6 @@ public class PlayerController implements Initializable {
 
         outPutArea.setText(" "+"MLB TEAMS\n\n"+name);
     }
-
 
     void displayPlayerData(Team response) throws IOException {
         String strA = String.valueOf(response.getPlayers());
